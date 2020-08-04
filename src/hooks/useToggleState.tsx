@@ -6,6 +6,18 @@ interface IToggleResult {
 }
 
 export const useToggleState = (initialState: number = 1, states: number[] = []): Readonly<IToggleResult> => {
+    if (!states.includes(initialState)) {
+        console.error(`Initial state ${initialState} is not available in possible states.`);
+    }
+
+    if (!states.length) {
+        console.error("States arr shouldn't be empty.");
+    }
+
+    if (!states.every(item => item >= 1)) {
+        console.error("Each element of the states arr should be >= 1.");
+    }
+
     const [currentState, setCurrentState] = useState<number>(initialState);
     const [possibleStates] = useState<number[]>(states);
 
