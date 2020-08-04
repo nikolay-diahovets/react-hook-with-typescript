@@ -24,15 +24,14 @@ export const useToggleState = <T extends unknown>(initialState: T, states: T[]):
     }
 
     const [currentState, setCurrentState] = useState<T>(initialState);
-    const [possibleStates] = useState<T[]>(states);
 
     const toggleCurrentState = useCallback((newState: T): void => {
-        if (possibleStates.some(state => isEqual(state, newState))) {
+        if (states.some(state => isEqual(state, newState))) {
             setCurrentState(newState);
         } else {
             console.error(`Current value: ${newState} is not available in possible states`);
         }
-    }, [possibleStates]);
+    }, [states]);
 
     return { currentState, toggleCurrentState };
 };
