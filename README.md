@@ -1,3 +1,9 @@
+# Custom React hook with TypeScript
+
+This is a test task project where is created custom react hook using TypeScript.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
