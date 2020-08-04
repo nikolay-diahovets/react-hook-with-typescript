@@ -26,10 +26,14 @@ const App: FC = () => {
             <div>
                 {
                     states.map((state, index) => {
-                        const { name: stateName, age: stateAge } = state;
+                        const { name, age } = state;
                         return (
                             <div key={index}>
-                                <button onClick={() => toggleCurrentState({ name: stateName, age: stateAge })}>{`State ${index + 1}`}</button>
+                                <button
+                                    onClick={() => toggleCurrentState({ name, age })}
+                                >
+                                    {`State ${index + 1}`}
+                                </button>
                             </div>
                         )
                     })
