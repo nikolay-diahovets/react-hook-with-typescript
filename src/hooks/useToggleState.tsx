@@ -1,12 +1,13 @@
 import { useState, useCallback } from "react";
+import { isEqual } from "lodash";
 
-interface IToggleResult {
-    currentState: number;
-    toggleCurrentState: (newState: number) => void;
+export interface IToggleResult<T> {
+    currentState: T;
+    toggleCurrentState: (newState: T) => void;
 }
 
-export const useToggleState = (initialState: number = 1, states: number[] = []): Readonly<IToggleResult> => {
-    if (!states.includes(initialState)) {
+export const useToggleState = <T extends unknown>(initialState: T, states: T[]): Readonly<IToggleResult<T>> => {
+    if (!states.some(state => isEqual(initialState, state))) {
         console.error(`Initial state ${initialState} is not available in possible states.`);
     }
 
@@ -14,15 +15,19 @@ export const useToggleState = (initialState: number = 1, states: number[] = []):
         console.error("States arr shouldn't be empty.");
     }
 
-    if (!states.every(item => item >= 1)) {
-        console.error("Each element of the states arr should be >= 1.");
+    if (!initialState) {
+        console.error("Initial state should be present.");
     }
 
-    const [currentState, setCurrentState] = useState<number>(initialState);
-    const [possibleStates] = useState<number[]>(states);
+    if (!states) {
+        console.error("States should be present.");
+    }
 
-    const toggleCurrentState = useCallback((newState: number): void => {
-        if (possibleStates.includes(newState)) {
+    const [currentState, setCurrentState] = useState<T>(initialState);
+    const [possibleStates] = useState<T[]>(states);
+
+    const toggleCurrentState = useCallback((newState: T): void => {
+        if (possibleStates.some(state => isEqual(state, newState))) {
             setCurrentState(newState);
         } else {
             console.error(`Current value: ${newState} is not available in possible states`);
