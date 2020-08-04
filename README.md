@@ -2,6 +2,13 @@
 
 This is a test task project where is created custom react hook using TypeScript.
 
+Hook is placed in folder src/hooks.
+
+## Task description
+
+Build a React hook that a programmer can use to toggle between n arbitrary states where n >= 1. I can feed the hook a set of possible states and an initial state. It returns the current state and a function to let me set a new state.
+Use Typescript and write a test suite for it using jest.
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
